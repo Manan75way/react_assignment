@@ -24,17 +24,17 @@ interface User {
   users: {
     createdAt: string;
     email: string;
-    inTime: any[]; 
+    inTime: any[];
     isAdmin: boolean;
-    onLeave: any[]; 
-    outTime: any[]; 
+    onLeave: any[];
+    outTime: any[];
     password: string;
-    shortLeave: any[]; 
+    shortLeave: any[];
     updatedAt: string;
     username: string;
     __v: number;
     _id: string;
-    [[Prototype]]: Object; 
+    [[Prototype]]: Object;
   };
 }
 
@@ -48,4 +48,10 @@ interface RegisterUsers {
 interface LoginUser {
   email: string;
   password: string;
+}
+
+interface LUser {
+  name: string;
+  email: string;
+  token: string;
 }

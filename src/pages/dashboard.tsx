@@ -6,8 +6,8 @@ const Dashboard = () => {
   const dispatch = useAppDispatch();
 
   const handleSubmit = () => {
-    localStorage.removeItem("user");
     dispatch(deleteUser());
+    localStorage.removeItem("user");
   };
 
   return (
