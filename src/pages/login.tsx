@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { object, string, number, date, InferType } from "yup";
+import { object, string } from "yup";
 import { useLoginUserMutation } from "../services/api";
+import { useAppDispatch } from "../store/store";
+import { userLogin } from "../store/reducers/userReducer";
 
 type formValue = {
   email: string;
@@ -10,7 +12,8 @@ type formValue = {
 
 const Login = () => {
   const form = useForm<formValue>();
-  const [err, setErr] = useState<string>("");
+  const dispatch = useAppDispatch();
+
   const { register, handleSubmit } = form;
   const [loginUser] = useLoginUserMutation();
 
@@ -27,14 +30,21 @@ const Login = () => {
         console.log(datas);
         try {
           const payload = await loginUser(datas).unwrap();
-          console.log("data", payload);
+          console.log(payload.users.username);
+
+          const actionData = {
+            name: payload.users.username,
+            email: payload.users.email,
+            token: payload.token,
+          };
+          localStorage.setItem("user", JSON.stringify(actionData));
+          dispatch(userLogin(actionData));
         } catch (error) {
           console.log("error", error);
         }
       })
       .catch((err) => {
         console.log("error", err);
-        setErr(err);
       });
   };
 
@@ -49,7 +59,6 @@ const Login = () => {
 
         <button type="submit">Submit</button>
       </form>
-      {err && <p>{err}</p>}
     </div>
   );
 };

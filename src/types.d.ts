@@ -1,15 +1,41 @@
+// interface User {
+//   data: {
+//     msg:string,
+//     token:string,
+//     users: {
+//       _id: string;
+//       username: string;
+//       password: string;
+//       email: string;
+//       isAdmin: boolean;
+//       inTime: Array;
+//       outTIme: Array;
+//       onLeave: Array;
+//       shortLeave: Array;
+//       createdAt: Date;
+//       updatedAt: Date;
+//     };
+//   };
+// }
+
 interface User {
-  _id: string;
-  username: string;
-  password: string;
-  email: string;
-  isAdmin: boolean;
-  inTime: Array;
-  outTIme: Array;
-  onLeave: Array;
-  shortLeave: Array;
-  createdAt: Date;
-  updatedAt: Date;
+  msg: string;
+  token: string;
+  users: {
+    createdAt: string;
+    email: string;
+    inTime: any[]; 
+    isAdmin: boolean;
+    onLeave: any[]; 
+    outTime: any[]; 
+    password: string;
+    shortLeave: any[]; 
+    updatedAt: string;
+    username: string;
+    __v: number;
+    _id: string;
+    [[Prototype]]: Object; 
+  };
 }
 
 interface RegisterUsers {

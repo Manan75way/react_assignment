@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { UseStore } from "react-redux";
 
 export const api = createApi({
   reducerPath: "api",
@@ -22,4 +21,4 @@ export const api = createApi({
   }),
 });
 
-export const { useRegisterNewUserMutation,useLoginUserMutation } = api;
+export const { useRegisterNewUserMutation, useLoginUserMutation } = api;

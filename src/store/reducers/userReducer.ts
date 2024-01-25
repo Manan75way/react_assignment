@@ -4,29 +4,29 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 interface UserState {
   name: string;
   email: string;
-  age: number;
+  token: string;
 }
 
 const initialState: UserState = {
-  name: "Ram",
-  email: "Ram@gmail.com",
-  age: 99999,
+  name: "",
+  email: "",
+  token: "",
 };
 
 export const userSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-    registerUser: (state, action: PayloadAction<UserState>) => {
+    userLogin: (state, action: PayloadAction<UserState>) => {
       state = action.payload;
       return state;
     },
-    deleteUser: (state, action: PayloadAction<UserState>) => {
+    deleteUser: (state) => {
       state = initialState;
       return state;
     },
   },
 });
 
-export const { registerUser, deleteUser } = userSlice.actions;
+export const { userLogin, deleteUser } = userSlice.actions;
 export default userSlice.reducer;

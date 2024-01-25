@@ -1,11 +1,11 @@
-import React from 'react'
+import { Navigate, Outlet } from "react-router-dom";
+import { useAppSelector } from "../store/store";
 
 const BasicLayout = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  const token = useAppSelector((state) => state.users.token);
+  console.log(token);
 
-export default BasicLayout
+  return token ? <Navigate to="/dashboard" /> : <Outlet />;
+};
+
+export default BasicLayout;

@@ -8,6 +8,8 @@ import { store } from "./store/store";
 import { BrowserRouter } from "react-router-dom";
 import { ApiProvider } from "@reduxjs/toolkit/query/react";
 import { api } from "./services/api";
+
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
