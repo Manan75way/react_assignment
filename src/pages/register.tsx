@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { object, string, number, date, InferType } from "yup";
+import { object, string, number } from "yup";
+import { useRegisterNewUserMutation } from "../services/api";
 type formValue = {
   username: string;
   email: string;
@@ -10,26 +11,33 @@ type formValue = {
 
 const Register = () => {
   const form = useForm<formValue>();
-  const [err, setErr] = useState<string>('');
   const { register, handleSubmit } = form;
-
+  const [userRegister] = useRegisterNewUserMutation();
   //   const { name, ref, onChange, onBlur } = register("username");
 
   const schema = object({
     username: string().required(),
     age: number().required().positive().integer(),
-    email: string().email(),
+    email: string().email().required(),
     password: string().required().min(8),
   });
 
-  const onSubmit = (data: formValue) => {
+  const onSubmit = async (data: formValue) => {
     const userData = schema.validate(data);
 
     userData
-      .then((data) => console.log(data))
+      .then(async (datas) => {
+        console.log(datas);
+
+        try {
+          const payload = await userRegister(datas).unwrap();
+          console.log('fulfilled', payload)
+        } catch (error) {
+          console.error('rejected', error);
+        }
+      })
       .catch((error) => {
-        console.log("error", err);
-        setErr(error);
+        console.log("error", error);
       });
   };
 
@@ -57,9 +65,7 @@ const Register = () => {
         <input type="password" id="password" {...register("password")} />
 
         <button type="submit">Submit</button>
-        <p>{err}</p>
       </form>
-    
     </div>
   );
 };
