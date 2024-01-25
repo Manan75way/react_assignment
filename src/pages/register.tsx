@@ -10,7 +10,7 @@ type formValue = {
 
 const Register = () => {
   const form = useForm<formValue>();
-  const [err, setErr] = useState<string>("Error");
+  const [err, setErr] = useState<string>('');
   const { register, handleSubmit } = form;
 
   //   const { name, ref, onChange, onBlur } = register("username");
