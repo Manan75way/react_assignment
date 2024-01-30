@@ -8,7 +8,9 @@ const AuthLayout = () => {
     console.log(data);
   }, []);
 
-  const token = useAppSelector((state) => state.users.token);
+
+  // const token = useAppSelector((state) => state.use
+  const token = useAppSelector((state)=>state.user.token)
 
   return token ? <Outlet /> : <Navigate to="/login" />;
 };

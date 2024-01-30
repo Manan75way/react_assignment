@@ -8,16 +8,19 @@ const BasicLayout = () => {
 
   useEffect(() => {
     const data: any = localStorage.getItem("user");
+
     const parsedData = JSON.parse(data);
-    const userData: LUser = {
-      name: parsedData?.name,
-      email: parsedData?.email,
-      token: parsedData?.token,
-    };
-    dispatch(userLogin(userData));
+    if (parsedData) {
+      const userData: LUser = {
+        name: parsedData?.name,
+        email: parsedData?.email,
+        token: parsedData?.token,
+      };
+      dispatch(userLogin(userData));
+    }
   }, []);
 
-  const token = useAppSelector((state) => state.users.token);
+  const token = useAppSelector((state) => state.user.token);
   console.log(token);
 
   return token ? <Navigate to="/dashboard" /> : <Outlet />;
